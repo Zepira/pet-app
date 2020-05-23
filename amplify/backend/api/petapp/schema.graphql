@@ -1,0 +1,24 @@
+type Todo @model {
+  id: ID!
+  name: String!
+  description: String
+}
+type Pet @model {
+  id: ID!
+  name: String!
+  animal: String!
+  age: Int!
+  gender: String!
+  breed: String!
+},
+type AnimalType @model{
+  id: ID!
+  animalType: String!
+  description: String
+}
+type Breed @model {
+  id: ID!
+  animalType: String!
+  breed: String!
+  description: String
+}

@@ -1,26 +1,55 @@
+/* src/App.js */
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { withAuthenticator } from '@aws-amplify/ui-react';
+import { BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
+import Container from '@material-ui/core/Container';
 
-function App() {
+import ToDo from './Components/ToDo/ToDo';
+import AddPet from './Components/AddPet/AddPet';
+import Home from './Components/Home/Home';
+import SideNav from './Components/SideNav/SideNav';
+
+const App = () => {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div >
+      <SideNav>
+      <Container style={styles.container}>
+      <Router>
+        {/* <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/todo">To Do</Link>
+            </li>
+            <li>
+              <Link to="/addpet">Add Pet</Link>
+            </li>
+          </ul>
+        </nav> */}
+        <Switch>
+          <Route path="/home" component={Home} /> 
+          <Route path="/todo" component={ToDo} />
+          <Route path="/addpet" component={AddPet} />   
+          <Route path="/" component={Home} /> 
+        </Switch>
+      </Router>
+      </Container>
+      </SideNav>
+      
     </div>
-  );
+  )
 }
 
-export default App;
+const styles = {
+  container: { paddingTop: '64px'},
+  todo: {  marginBottom: 15 },
+  input: { border: 'none', backgroundColor: '#ddd', marginBottom: 10, padding: 8, fontSize: 18 },
+  todoName: { fontSize: 20, fontWeight: 'bold' },
+  todoDescription: { marginBottom: 0 },
+  button: { backgroundColor: 'black', color: 'white', outline: 'none', fontSize: 18, padding: '12px 0px' }
+}
+
+export default withAuthenticator(App)
